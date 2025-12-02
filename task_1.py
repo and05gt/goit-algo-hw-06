@@ -39,16 +39,15 @@ for station in transfer_stations:
 
 if __name__ == "__main__":
     # Візуалізація
-    plt.figure(figsize=(14, 10))
+    plt.figure(figsize=(16, 12))
 
     pos = nx.spring_layout(G, seed=42)
 
     colors = [G.nodes[n]['color'] for n in G.nodes()]
-    sizes = [800 if n in transfer_stations else 400 for n in G.nodes()]
 
-    nx.draw_networkx_nodes(G, pos, node_color=colors, node_size=sizes, edgecolors='black')
-    nx.draw_networkx_edges(G, pos, width=3, alpha=0.6)
-    nx.draw_networkx_labels(G, pos, font_size=10, font_weight="bold", font_family="sans-serif")
+    nx.draw_networkx_nodes(G, pos, node_color=colors, node_size=500)
+    nx.draw_networkx_edges(G, pos, width=2, alpha=0.5)
+    nx.draw_networkx_labels(G, pos, font_size=10, font_weight="bold")
 
     plt.title("Схема гіпотетичного метро м. Миколаїв", fontsize=16)
     plt.axis("off")
