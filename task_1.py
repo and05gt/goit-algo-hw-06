@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 G = nx.Graph()
 
-# --- Визначаємо лінії метро м. Миколаєва ---
+# Визначаємо лінії метро м. Миколаєва
 
 # 1. Червона лінія: Від Намиву через весь проспект Центральний
 red_line = [
@@ -37,29 +37,30 @@ transfer_stations = ["Соборна", "Зоопарк", "Парк Перемо�
 for station in transfer_stations:
     G.nodes[station]['color'] = 'yellow' # Робимо пересадки жовтими
 
-# --- Візуалізація ---
-plt.figure(figsize=(14, 10))
+if __name__ == "__main__":
+    # Візуалізація
+    plt.figure(figsize=(14, 10))
 
-pos = nx.spring_layout(G, seed=42)
+    pos = nx.spring_layout(G, seed=42)
 
-colors = [G.nodes[n]['color'] for n in G.nodes()]
-sizes = [800 if n in transfer_stations else 400 for n in G.nodes()]
+    colors = [G.nodes[n]['color'] for n in G.nodes()]
+    sizes = [800 if n in transfer_stations else 400 for n in G.nodes()]
 
-nx.draw_networkx_nodes(G, pos, node_color=colors, node_size=sizes, edgecolors='black')
-nx.draw_networkx_edges(G, pos, width=3, alpha=0.6)
-nx.draw_networkx_labels(G, pos, font_size=10, font_weight="bold", font_family="sans-serif")
+    nx.draw_networkx_nodes(G, pos, node_color=colors, node_size=sizes, edgecolors='black')
+    nx.draw_networkx_edges(G, pos, width=3, alpha=0.6)
+    nx.draw_networkx_labels(G, pos, font_size=10, font_weight="bold", font_family="sans-serif")
 
-plt.title("Схема гіпотетичного метро м. Миколаїв", fontsize=16)
-plt.axis("off")
-plt.show()
+    plt.title("Схема гіпотетичного метро м. Миколаїв", fontsize=16)
+    plt.axis("off")
+    plt.show()
 
-# --- Аналіз ---
-print("--- Аналіз Миколаївського метрополітену ---")
-print(f"Всього станцій: {G.number_of_nodes()}")
-print(f"Всього перегонів: {G.number_of_edges()}")
+    # Аналіз
+    print("--- Аналіз Миколаївського метрополітену ---")
+    print(f"Всього станцій: {G.number_of_nodes()}")
+    print(f"Всього перегонів: {G.number_of_edges()}")
 
-# Сортуємо станції за важливістю (ступенем)
-degrees = sorted(G.degree, key=lambda x: x[1], reverse=True)
-print("\nТОП-3 найважливіших станцій (Хаби):")
-for node, degree in degrees[:3]:
-    print(f"- Станція '{node}': {degree} з'єднань")
+    # Сортуємо станції за важливістю (ступенем)
+    degrees = sorted(G.degree, key=lambda x: x[1], reverse=True)
+    print("\nТОП-3 найважливіших станцій (Хаби):")
+    for node, degree in degrees[:3]:
+        print(f"- Станція '{node}': {degree} з'єднань")
